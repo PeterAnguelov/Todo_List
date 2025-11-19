@@ -12,6 +12,7 @@ namespace Todo_List
         static void Main(string[] args)
         {
             int option = -1;
+            // loops until exited
             while (option != 9)
             {
                 option = OptionSelector();
@@ -26,9 +27,9 @@ namespace Todo_List
             string[] options = new string[] 
             { 
                 "1. Add a new task",
-                "2. Complete a Task",
-                "3. Remove Task",
-                "4. Show tasks",
+                "2. Show tasks",
+                "3. Complete a Task",
+                "4. Remove Task",
                 "5. Create task Group",
                 "6. Add task to Group",
                 "7. Remove task from Group",
@@ -51,18 +52,26 @@ namespace Todo_List
         // This decides what tasks to perform based on option selected
         static void OptionPerformer(int option) 
         {
+            int index;
             switch (option)
             {
                 case 1:
                     tasks.Add(AddNewTask());
                     break;
                 case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
                     CurrentTasks();
                     Console.ReadLine();
+
+                    break;
+                case 3:
+                    index = CompleteTask() - 1;
+                    tasks[index] = tasks[index] + " (Completed)";
+
+                    break;
+                case 4:
+                    index = RemoveTask() - 1;
+                    tasks.RemoveAt(index);
+
                     break;
                 case 5:
                     break;
@@ -79,6 +88,7 @@ namespace Todo_List
             }
         }
 
+        // 1. Add a new task
         static string AddNewTask()
         {
             Console.Write("Please task: ");
@@ -87,13 +97,34 @@ namespace Todo_List
             return task;
         }
 
+        // 2. Show tasks
         static void CurrentTasks()
         {
+            Console.Clear();
             for (int i = 0; i < tasks.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {tasks[i]}");
             }
         }
+
+        // 3. Complete a Task
+        static int CompleteTask()
+        {
+            CurrentTasks();
+            Console.Write("Enter which task you would like to complete: ");
+
+            return Convert.ToInt32(Console.ReadLine());
+        }
+
+        // 4. Remove Task
+        static int RemoveTask()
+        {
+            CurrentTasks();
+            Console.Write("Enter which task you would like to remove: ");
+
+            return Convert.ToInt32(Console.ReadLine());
+        }
+
     }
 }
 
