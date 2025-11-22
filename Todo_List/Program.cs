@@ -14,36 +14,20 @@ namespace Todo_List
         static void Main(string[] args)
         {
             int option = -1;
+            Options options = new Options(option);
             // loops until exited
             while (option != 9)
             {
+                options.OptionPrinter();
                 option = OptionSelector();
-                OptionPerformer(option);
+                //OptionPerformer(option);
+                option = 9;
             }
         }
 
         // Prints out options and returns one of the selected options
         static int OptionSelector()
         {
-            Console.Clear();
-            string[] options = new string[] 
-            { 
-                "1. Add a new task",
-                "2. Show tasks",
-                "3. Complete a Task",
-                "4. Remove Task",
-                "5. Create task Group",
-                "6. Add task to Group",
-                "7. Remove task from Group",
-                "8. Remove Group",
-                "9. Exit"
-            };
-
-            foreach (string item in options)
-            {
-                Console.WriteLine(item);
-            }
-
             Console.Write(Environment.NewLine + "Pick a option: ");
             int option = Convert.ToInt32(Console.ReadLine());
             
